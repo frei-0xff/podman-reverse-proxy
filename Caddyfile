@@ -1,11 +1,5 @@
 :{$PORT} {
     reverse_proxy http://195.93.180.66:80
-
-    template {
-        find "http://rubanenko.biz.ua"
-        replace "https://rubanenko.biz.ua"
-    }
-
     log {
         output stdout
         format console
