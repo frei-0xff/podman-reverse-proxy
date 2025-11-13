@@ -1,4 +1,4 @@
-:80 {
+:{$PORT} {
     reverse_proxy http://195.93.180.66:80
     log {
         output stdout

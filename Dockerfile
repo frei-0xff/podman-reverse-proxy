@@ -1,10 +1,7 @@
-# Use official Caddy image
 FROM docker.io/library/caddy:2-alpine
 
-# Copy our Caddy configuration file into the container
 COPY Caddyfile /etc/caddy/Caddyfile
+RUN setcap -r /usr/bin/caddy
 
-# Expose port 80 for HTTP
-EXPOSE 80
-
-# Start Caddy (default entrypoint is fine)
+EXPOSE 8080
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
