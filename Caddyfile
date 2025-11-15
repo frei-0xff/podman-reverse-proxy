@@ -1,7 +1,18 @@
 :{$PORT} {
-    reverse_proxy http://195.93.180.66:8888
-    log {
-        output stdout
-        format console
-    }
+	bind 0.0.0.0
+
+	@healthcheck {
+		method HEAD
+		path /
+	}
+	respond @healthcheck 200
+
+	reverse_proxy http://195.93.180.66:8888 {
+		header_up Host "{$HOST}"
+	}
+
+	log {
+		output stdout
+		format console
+	}
 }
