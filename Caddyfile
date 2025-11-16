@@ -1,6 +1,13 @@
+{
+	admin off
+}
 http:// :{$PORT} {
 	reverse_proxy http://195.93.180.66:80 {
 		header_up Host "{$HOST}"
+	}
+	replace_response {
+		search "{$HOST}"
+		replace "{http.request.host}"
 	}
 	log {
 		output stdout
