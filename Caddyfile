@@ -1,0 +1,19 @@
+{
+	admin off
+}
+http:// :{$PORT} {
+	reverse_proxy http://{$UPSTREAM} {
+		header_up Host "{$HOST}"
+		header_up Accept-Encoding "identity"
+	}
+	replace {
+		match {
+			header Content-Type text/html*
+		}
+		"{$HOST}" "{http.request.host}"
+	}
+	log {
+		output stdout
+		format console
+	}
+}
